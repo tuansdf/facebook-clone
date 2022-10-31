@@ -2,9 +2,9 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcryptjs';
 import { IJwtPayload, IJwtResponse } from 'shared-types';
-import { CreateUserDto } from '../user/dto/create-user.dto';
-import { User } from '../user/user.entity';
-import { UserService } from '../user/user.service';
+import { CreateUserDto } from '/src/user/dto/create-user.dto';
+import { User } from '/src/user/user.entity';
+import { UserService } from '/src/user/user.service';
 
 @Injectable()
 export class AuthService {

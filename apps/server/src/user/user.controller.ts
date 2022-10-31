@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UserService } from './user.service';
+import { UserService } from '/src/user/user.service';
 
 @ApiTags('user')
 @Controller('users')

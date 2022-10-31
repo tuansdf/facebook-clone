@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs';
 import { IUser } from 'shared-types';
 import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
-import { CommonEntity } from '../shared/common.entity';
+import { CommonEntity } from '/src/shared/common.entity';
 
 @Entity()
 export class User extends CommonEntity implements IUser {
