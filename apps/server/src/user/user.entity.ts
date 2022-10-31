@@ -1,5 +1,6 @@
+import { hash } from 'bcryptjs';
 import { IUser } from 'shared-types';
-import { Column, Entity } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
 import { CommonEntity } from '../shared/common.entity';
 
 @Entity()
@@ -11,8 +12,17 @@ export class User extends CommonEntity implements IUser {
   username: string;
 
   @Column()
-  name: string;
+  firstName: string;
+
+  @Column()
+  lastName: string;
 
   @Column()
   password: string;
+
+  @BeforeUpdate()
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await hash(this.password, 10);
+  }
 }
