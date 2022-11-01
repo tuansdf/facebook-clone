@@ -1,4 +1,7 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { ILoginUserDto } from "shared-types";
+import useAuthStore from "/src/features/auth/auth.store";
 import Button from "/src/features/ui/button";
 import Card from "/src/features/ui/card";
 import Divider from "/src/features/ui/divider";
@@ -6,7 +9,17 @@ import Link from "/src/features/ui/link";
 import TextField from "/src/features/ui/text-field";
 
 export default function LoginPage() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<ILoginUserDto>();
+
+  const login = useAuthStore((state) => state.login);
+  const isLoading = useAuthStore((state) => state.isLoading);
+  const error = useAuthStore((state) => state.error);
+
+  const navigate = useNavigate();
+
+  const onSubmit = (data: ILoginUserDto) => {
+    login(data, { onSuccess: () => navigate("/") });
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -28,7 +41,10 @@ export default function LoginPage() {
             {/* right */}
             <div className="flex-none">
               <Card bordered width="25rem">
-                <div className="flex flex-col items-center gap-4">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col items-center gap-4"
+                >
                   <div className="space-y-3">
                     <TextField
                       placeholder="Email"
@@ -46,15 +62,22 @@ export default function LoginPage() {
                       fullWidth
                     />
                   </div>
-                  <Button filled fullWidth>
-                    Log in
-                  </Button>
-                  <Link href="https://www.google.com">Forgetten password?</Link>
+                  <div className="w-full space-y-2 text-center">
+                    <Button isLoading={isLoading} filled fullWidth>
+                      Log in
+                    </Button>
+                    {error ? (
+                      <div className="text-sm text-red-500">
+                        {error.message}
+                      </div>
+                    ) : null}
+                  </div>
+                  <Link href="https://www.google.com">Forgotten password?</Link>
                   <Divider />
                   <Button filled color="secondary">
                     Create New Account
                   </Button>
-                </div>
+                </form>
               </Card>
 
               <p className="mt-6 text-center text-sm">

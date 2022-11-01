@@ -1,11 +1,14 @@
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { ComponentChildren } from "preact";
 
 interface Props {
-  children?: string;
+  children?: ComponentChildren;
   filled?: boolean;
   fullWidth?: boolean;
   color?: "secondary";
   disabled?: boolean;
+  isLoading?: boolean;
 }
 
 export default function Button({
@@ -14,12 +17,13 @@ export default function Button({
   fullWidth,
   color,
   disabled,
+  isLoading,
 }: Props) {
   return (
     <button
       disabled={disabled}
       className={clsx(
-        "rounded-base py-2.5 px-4 text-lg font-semibold transition-colors",
+        "flex items-center justify-center gap-2 rounded-base py-2.5 px-4 text-lg font-semibold transition-colors",
         {
           "bg-primary text-primary-content hover:bg-primary-focus":
             !disabled && filled && color !== "secondary",
@@ -32,6 +36,7 @@ export default function Button({
         }
       )}
     >
+      {isLoading ? <ArrowPathIcon className="h-6 w-6 animate-spin" /> : null}
       {children}
     </button>
   );

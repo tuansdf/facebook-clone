@@ -37,7 +37,7 @@ export default function TextField({
           "rounded-base": !rounded,
           "bg-background": filled,
           "bg-gray-300": disabled,
-          "border-base border-gray-200": bordered,
+          "border-base border-gray-300": bordered,
           "w-full": fullWidth,
           "w-max": !fullWidth,
         }

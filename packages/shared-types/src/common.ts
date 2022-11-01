@@ -3,3 +3,9 @@ export interface ICommonEntity {
   created: Date;
   updated: Date;
 }
+
+export interface IErrorResponse {
+  statusCode: number;
+  message: string;
+  error?: string;
+}
