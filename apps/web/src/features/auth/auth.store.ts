@@ -16,7 +16,6 @@ interface IOptions {
 
 interface IAuthState {
   user: IJwtResponse | null;
-  isAuth: () => boolean;
 
   isLoading: boolean;
   error: IErrorResponse | null;
@@ -26,15 +25,12 @@ interface IAuthState {
   logout: () => void;
 }
 
-const useAuthStore = create(
-  persist<IAuthState>(
+const useAuthStore = create<IAuthState>()(
+  persist(
     (set, get) => ({
       user: null,
       isLoading: false,
       error: null,
-      isAuth: () => {
-        return !!get().user?.accessToken;
-      },
       login: async (data: ILoginUserDto, options?: IOptions) => {
         set({ isLoading: true, error: null });
         try {
