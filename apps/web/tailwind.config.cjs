@@ -18,6 +18,13 @@ module.exports = {
       borderWidth: {
         base: "1px",
       },
+      container: {
+        center: true,
+      },
+      screens: {
+        mobile: "375px",
+        tablet: "1024px",
+      },
     },
   },
   plugins: [],

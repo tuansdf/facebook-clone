@@ -31,7 +31,7 @@ export default function TextField({
       disabled={disabled}
       {...register(field)}
       className={clsx(
-        "py-2.5 px-4 outline-none focus:border-primary focus:shadow",
+        "py-3 px-4 outline-none focus:border-primary focus:shadow",
         {
           "rounded-full": rounded,
           "rounded-base": !rounded,

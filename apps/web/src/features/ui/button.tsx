@@ -19,7 +19,7 @@ export default function Button({
     <button
       disabled={disabled}
       className={clsx(
-        "rounded-base py-2.5 px-4 font-semibold transition-colors",
+        "rounded-base py-2.5 px-4 text-lg font-semibold transition-colors",
         {
           "bg-primary text-primary-content hover:bg-primary-focus":
             !disabled && filled && color !== "secondary",

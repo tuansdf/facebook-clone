@@ -9,10 +9,13 @@ interface Props {
 export default function Card({ children, width, bordered }: Props) {
   return (
     <div
-      className={clsx("flex flex-col rounded-base bg-white p-4 shadow-lg", {
-        "border-base": bordered,
-      })}
-      style={width ? { width } : undefined}
+      className={clsx(
+        "flex w-full flex-col rounded-base bg-white p-4 shadow-lg",
+        {
+          "border-base": bordered,
+        }
+      )}
+      style={width ? { maxWidth: width } : undefined}
     >
       {children}
     </div>
