@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost:3000",
 });
 
-axios.interceptors.request.use((config) => {
+axiosInstance.interceptors.request.use((config) => {
   if (config.headers) {
     config.headers.Authorization = `Bearer token`;
   }

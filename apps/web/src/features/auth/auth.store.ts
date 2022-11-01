@@ -39,24 +39,24 @@ const useAuthStore = create(
         set({ isLoading: true, error: null });
         try {
           const user = await authService.login(data);
-          set({ user });
+          set({ isLoading: false, user });
           options?.onSuccess?.();
         } catch (error) {
           if (axios.isAxiosError(error)) {
-            set({ error: error.response?.data });
+            set({ isLoading: false, error: error.response?.data });
           }
           options?.onError?.();
         }
-        set({ isLoading: false });
       },
       register: async (data: ICreateUserDto, options?: IOptions) => {
+        set({ isLoading: true, error: null });
         try {
           const user = await authService.register(data);
-          set({ user });
+          set({ isLoading: false, user });
           options?.onSuccess?.();
         } catch (error) {
           if (axios.isAxiosError(error)) {
-            set({ error: error.response?.data });
+            set({ isLoading: false, error: error.response?.data });
           }
           options?.onError?.();
         }

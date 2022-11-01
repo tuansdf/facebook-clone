@@ -1,13 +1,12 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { ComponentChildren } from "preact";
+import { ComponentChildren, JSX } from "preact";
 
-interface Props {
+interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   children?: ComponentChildren;
   filled?: boolean;
   fullWidth?: boolean;
   color?: "secondary";
-  disabled?: boolean;
   isLoading?: boolean;
 }
 
@@ -16,12 +15,13 @@ export default function Button({
   filled,
   fullWidth,
   color,
-  disabled,
   isLoading,
+  disabled,
+  ...rest
 }: Props) {
   return (
     <button
-      disabled={disabled}
+      {...rest}
       className={clsx(
         "flex items-center justify-center gap-2 rounded-base py-2.5 px-4 text-lg font-semibold transition-colors",
         {

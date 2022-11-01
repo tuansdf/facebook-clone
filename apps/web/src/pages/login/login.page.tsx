@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ILoginUserDto } from "shared-types";
 import useAuthStore from "/src/features/auth/auth.store";
@@ -17,7 +17,7 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data: ILoginUserDto) => {
+  const onSubmit: SubmitHandler<ILoginUserDto> = (data) => {
     login(data, { onSuccess: () => navigate("/") });
   };
 
@@ -48,18 +48,18 @@ export default function LoginPage() {
                   <div className="space-y-3">
                     <TextField
                       placeholder="Email"
-                      register={register}
-                      field="email"
                       bordered
                       fullWidth
+                      type="text"
+                      {...register("email", { required: true })}
                     />
+
                     <TextField
                       placeholder="Password"
-                      register={register}
-                      field="password"
                       bordered
-                      type="password"
                       fullWidth
+                      type="password"
+                      {...register("password", { required: true })}
                     />
                   </div>
                   <div className="w-full space-y-2 text-center">
