@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+*::after,
+*::before {
+  @apply outline-offset-4 focus:outline focus:outline-1 focus:outline-primary;
+}
