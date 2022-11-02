@@ -1,11 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CheckAuth from "/src/features/auth/check-auth.layout";
-import LoginPage from "/src/pages/login/login.page";
+import ShouldAuth from "/src/features/auth/should-auth.layout";
+import ShouldNotAuth from "/src/features/auth/should-not-auth.layout";
+import AuthPage from "/src/pages/auth/auth.page";
 
 const router = createBrowserRouter([
-  { path: "login", element: <LoginPage /> },
   {
-    element: <CheckAuth />,
+    path: "auth/",
+    element: <ShouldNotAuth />,
+    children: [{ element: <AuthPage /> }],
+  },
+  {
+    element: <ShouldAuth />,
     children: [{ path: "/", element: <div>Home</div> }],
   },
 ]);

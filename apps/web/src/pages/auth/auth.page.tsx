@@ -8,7 +8,7 @@ import Divider from "/src/features/ui/divider";
 import Link from "/src/features/ui/link";
 import TextField from "/src/features/ui/text-field";
 
-export default function LoginPage() {
+export default function AuthPage() {
   const { register, handleSubmit } = useForm<ILoginUserDto>();
 
   const login = useAuthStore((state) => state.login);
