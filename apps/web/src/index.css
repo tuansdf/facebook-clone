@@ -5,5 +5,5 @@
 *,
 *::after,
 *::before {
-  @apply outline-offset-4 focus:outline focus:outline-1 focus:outline-primary;
+  @apply outline-offset-2 focus:outline focus:outline-1 focus:outline-primary;
 }

@@ -11,6 +11,7 @@ module.exports = {
         "secondary-focus": "#3fae28",
         "secondary-content": "white",
         background: "#f0f2f5",
+        error: "#dc2626",
       },
       borderRadius: {
         base: "0.375rem",
