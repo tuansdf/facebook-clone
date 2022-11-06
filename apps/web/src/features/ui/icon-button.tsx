@@ -10,8 +10,9 @@ export default function IconButton({ Icon, filled, ...rest }: Props) {
   return (
     <button
       {...rest}
-      className={clsx("aspect-square rounded-full", {
-        "bg-gray-200 p-3 transition-colors hover:bg-gray-300": filled,
+      className={clsx("aspect-square rounded-full transition-colors", {
+        "bg-gray-200 p-3 hover:bg-gray-300": filled,
+        "p-1 hover:bg-gray-200": !filled,
       })}
     >
       {Icon}
