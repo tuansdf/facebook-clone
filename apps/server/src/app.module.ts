@@ -1,6 +1,8 @@
-import { Module } from '@nestjs/common';
+import { ClassSerializerInterceptor, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PostModule } from './post/post.module';
 import { AuthModule } from '/src/auth/auth.module';
 import { UserModule } from '/src/user/user.module';
 
@@ -21,6 +23,13 @@ import { UserModule } from '/src/user/user.module';
     }),
     AuthModule,
     UserModule,
+    PostModule,
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
+    },
   ],
 })
 export class AppModule {}

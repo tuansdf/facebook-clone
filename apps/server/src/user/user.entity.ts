@@ -1,6 +1,8 @@
 import { hash } from 'bcryptjs';
+import { Exclude } from 'class-transformer';
 import { IUser } from 'shared-types';
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
+import { Post } from '/src/post/post.entity';
 import { CommonEntity } from '/src/shared/common.entity';
 
 @Entity()
@@ -18,7 +20,11 @@ export class User extends CommonEntity implements IUser {
   lastName: string;
 
   @Column()
+  @Exclude()
   password: string;
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 
   @BeforeUpdate()
   @BeforeInsert()
