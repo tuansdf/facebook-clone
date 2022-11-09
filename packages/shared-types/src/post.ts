@@ -3,7 +3,9 @@ import { IUser } from "./user";
 
 export interface IPost extends ICommonEntity {
   body: string;
-  likes: number;
+  numLikes: number;
+  numComments: number;
+  numShares: number;
   user: IUser;
 }
 

@@ -15,7 +15,11 @@ export class PostService {
   ) {}
 
   async findAll(): Promise<Post[]> {
-    return this.postRepository.find();
+    return this.postRepository
+      .createQueryBuilder('post')
+      .leftJoinAndSelect('post.user', 'user')
+      .orderBy('post.created', 'DESC')
+      .getMany();
   }
 
   async findOneById(postId: string): Promise<Post | null> {

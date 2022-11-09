@@ -9,7 +9,13 @@ export class Post extends CommonEntity implements IPost {
   body: string;
 
   @Column({ default: 0 })
-  likes: number;
+  numLikes: number;
+
+  @Column({ default: 0 })
+  numComments: number;
+
+  @Column({ default: 0 })
+  numShares: number;
 
   @ManyToOne(() => User, (user) => user.posts)
   user: User;
