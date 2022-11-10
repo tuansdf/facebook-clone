@@ -1,4 +1,4 @@
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "preact/hooks";
 import AuthFooter from "/src/features/auth/auth-footer";
 import LoginForm from "/src/features/auth/login-form";

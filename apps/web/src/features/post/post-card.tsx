@@ -3,7 +3,7 @@ import {
   EllipsisHorizontalIcon,
   HandThumbUpIcon,
   ShareIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
 import Avatar from "boring-avatars";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -97,7 +97,9 @@ export default function PostCard({
         <Divider />
         {/* comments */}
         <div className="flex items-center gap-2 py-2">
-          <Avatar size={40} name={user?.firstName} />
+          <div>
+            <Avatar size={40} name={user?.firstName} />
+          </div>
           <TextField
             fullWidth
             filled

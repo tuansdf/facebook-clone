@@ -1,4 +1,4 @@
-import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { ComponentChildren, JSX } from "preact";
 

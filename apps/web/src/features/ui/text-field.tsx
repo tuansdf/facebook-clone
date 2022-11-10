@@ -1,4 +1,4 @@
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { JSX } from "preact";
 import { forwardRef } from "preact/compat";

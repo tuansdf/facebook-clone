@@ -1,5 +1,8 @@
-import { FaceSmileIcon } from "@heroicons/react/24/outline";
-import { PhotoIcon, VideoCameraIcon } from "@heroicons/react/24/solid";
+import {
+  FaceSmileIcon,
+  PhotoIcon,
+  VideoCameraIcon,
+} from "@heroicons/react/24/outline";
 import Avatar from "boring-avatars";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
@@ -36,13 +39,15 @@ export default function CreatePostForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex items-center gap-2"
       >
-        <Avatar size={40} name={user?.firstName} />
+        <div>
+          <Avatar size={45} name={user?.firstName} />
+        </div>
         <TextField
           fullWidth
           filled
           pill
           short
-          placeholder={`What's on your mind, ${user?.firstName}`}
+          placeholder={`What's on your mind, ${user?.firstName}?`}
           {...register("body")}
         />
       </form>

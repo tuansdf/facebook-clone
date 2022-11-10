@@ -17,7 +17,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   return (
-    <nav className="flex items-center justify-between px-4 py-2 shadow">
+    <nav className="relative flex items-center justify-between px-4 py-2 shadow">
       {/* logo */}
       <ul>
         <Link to="/">
@@ -28,8 +28,10 @@ export default function Header() {
       </ul>
 
       {/* search */}
-      <ul>
-        <TextField filled pill fullWidth placeholder="Search Facebook" />
+      <ul className="absolute inset-0 flex items-center">
+        <div className="mx-auto w-full max-w-screen-sm">
+          <TextField filled pill fullWidth placeholder="Search Facebook" />
+        </div>
       </ul>
 
       {/* end */}
