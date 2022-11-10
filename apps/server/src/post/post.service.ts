@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IJwtPayload } from 'shared-types';
 import { Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Post } from '/src/post/post.entity';
@@ -17,7 +16,9 @@ export class PostService {
   async findAll(): Promise<Post[]> {
     return this.postRepository
       .createQueryBuilder('post')
-      .leftJoinAndSelect('post.user', 'user')
+      .leftJoinAndSelect('post.user', 'post-user')
+      .leftJoinAndSelect('post.comments', 'comment')
+      .leftJoinAndSelect('comment.user', 'comment-user')
       .orderBy('post.created', 'DESC')
       .getMany();
   }
@@ -34,10 +35,10 @@ export class PostService {
     return post;
   }
 
-  async create(createPostDto: CreatePostDto, user: IJwtPayload): Promise<Post> {
+  async create(createPostDto: CreatePostDto, userId: string): Promise<Post> {
     const post = new Post();
 
-    const savedUser = await this.userService.findOneByIdOrFail(user.id);
+    const savedUser = await this.userService.findOneByIdOrFail(userId);
 
     post.body = createPostDto.body;
     post.user = savedUser;

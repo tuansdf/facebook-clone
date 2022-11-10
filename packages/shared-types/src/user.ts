@@ -1,3 +1,4 @@
+import { IComment } from "./comment";
 import { ICommonEntity } from "./common";
 import { IPost } from "./post";
 
@@ -6,7 +7,8 @@ export interface IUser extends ICommonEntity {
   username: string;
   firstName: string;
   lastName: string;
-  posts: IPost[];
+  posts?: IPost[];
+  comments?: IComment[];
 }
 
 export interface ICreateUserDto {

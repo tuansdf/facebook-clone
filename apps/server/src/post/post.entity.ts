@@ -1,5 +1,6 @@
 import { IPost } from 'shared-types';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Comment } from '/src/comment/comment.entity';
 import { CommonEntity } from '/src/shared/common.entity';
 import { User } from '/src/user/user.entity';
 
@@ -19,4 +20,7 @@ export class Post extends CommonEntity implements IPost {
 
   @ManyToOne(() => User, (user) => user.posts)
   user: User;
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  comments: Comment[];
 }

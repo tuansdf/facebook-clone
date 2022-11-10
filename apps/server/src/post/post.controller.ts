@@ -13,9 +13,9 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { PostService } from './post.service';
 import { JwtAuthGuard } from '/src/auth/passport/jwt-auth.guard';
 
-@UseGuards(JwtAuthGuard)
 @ApiTags('post')
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
@@ -32,6 +32,6 @@ export class PostController {
 
   @Post()
   create(@Body() createPostDto: CreatePostDto, @Req() req: any) {
-    return this.postService.create(createPostDto, req.user);
+    return this.postService.create(createPostDto, req.user.id);
   }
 }
