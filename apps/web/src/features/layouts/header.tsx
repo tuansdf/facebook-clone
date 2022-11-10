@@ -46,7 +46,7 @@ export default function Header() {
           <IconButton Icon={<BellIcon className="h-5 w-5" />} filled />
         </li>
         <li>
-          <Menu as="div" className="relative inline-block">
+          <Menu className="relative inline-block">
             <Menu.Button className="relative cursor-pointer hover:brightness-90">
               <Avatar size={40} name={user?.firstName} />
               <ChevronDownIcon className="absolute right-0 bottom-0 h-4 w-4 rounded-base bg-gray-200 p-1" />

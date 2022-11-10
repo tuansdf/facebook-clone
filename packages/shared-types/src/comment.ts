@@ -8,3 +8,7 @@ export interface IComment extends ICommonEntity {
   user?: IUser;
   post?: IPost;
 }
+
+export interface ICreateCommentDto {
+  text: string;
+}

@@ -8,8 +8,16 @@ import { HandThumbUpIcon as HandThumbUpIconSolid } from "@heroicons/react/24/sol
 import Avatar from "boring-avatars";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { IPost } from "shared-types";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import {
+  IComment,
+  ICreateCommentDto,
+  IErrorResponse,
+  IPost,
+} from "shared-types";
 import useAuthStore from "/src/features/auth/auth.store";
+import commentService from "/src/features/post/comment.service";
 import Divider from "/src/features/ui/divider";
 import IconButton from "/src/features/ui/icon-button";
 import TextField from "/src/features/ui/text-field";
@@ -22,6 +30,24 @@ interface Props {
 
 export default function PostCard({ post }: Props) {
   const user = useAuthStore((state) => state.user);
+
+  const { register, handleSubmit } = useForm<ICreateCommentDto>();
+
+  const queryClient = useQueryClient();
+
+  const commentMutation = useMutation<
+    IComment,
+    IErrorResponse,
+    ICreateCommentDto
+  >((data) => commentService.create(data, post.id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["posts"]);
+    },
+  });
+
+  const onSubmit: SubmitHandler<ICreateCommentDto> = (data) => {
+    commentMutation.mutate(data);
+  };
 
   return (
     <div className="flex w-full flex-col gap-4 rounded-base bg-white shadow-sm">
@@ -86,7 +112,10 @@ export default function PostCard({ post }: Props) {
         </div>
         <Divider />
         {/* add comment */}
-        <div className="flex items-center gap-2 py-2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex items-center gap-2 py-2"
+        >
           <div>
             <Avatar size={40} name={user?.firstName} />
           </div>
@@ -96,22 +125,23 @@ export default function PostCard({ post }: Props) {
             pill
             short
             placeholder="Write a comment..."
+            {...register("text")}
           />
-        </div>
+        </form>
 
         {/* comments */}
         {post.comments?.length ? (
           <div className="mt-4 mb-2 grid gap-4">
             {post.comments?.map((comment) => (
-              <div className="flex gap-3">
+              <div className="relative flex gap-3">
                 <div>
                   <Avatar size={40} name={user?.firstName} />
                 </div>
-                <div className="rounded-xl bg-gray-100 px-2 py-1.5 text-sm">
+                <div className="flex flex-col rounded-xl bg-gray-100 px-2 py-1.5 text-sm">
                   <span className="cursor-pointer font-bold">
                     {comment.user?.firstName}
                   </span>
-                  <p className="overflow-hidden text-ellipsis text-gray-900">
+                  <p className="flex-1 flex-wrap break-words text-gray-900">
                     {comment.text}
                   </p>
                 </div>
